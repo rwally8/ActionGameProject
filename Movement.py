@@ -20,3 +20,8 @@ def director(move, xvel, yvel):                         #edit this function base
         elif ((move.key == pygame.K_LEFT)):
             xvel=xvel+1
     return (xvel, yvel)    
+
+def damage(life, spritename, invince, plrgrp, eblltgrp, enmygrp):
+    if (((pygame.sprite.group collide(plrgrp, ebiltgrp, False, True, collided = None)!>None)|(pygame.sprite.groupcollide(plrgrp, enmygrp, False, False, collided = None)))&(invince<=0)):
+        life = life1
+        invince=5
