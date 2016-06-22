@@ -1,0 +1,40 @@
+import pygame
+import random
+
+BLACK = (0, 0 , 0)
+WHITE = (255, 255, 255)
+
+pygame.init()
+
+screen = pygame.display.set_mode((800,600))
+
+character = pygame.Surface((20,20))
+#class for wizard
+class Wizard1(pygame.sprite.Sprite):
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+        # import image
+        self.i0 = pygame.image.load("ActionGameProject/Graphics/wizard.png")
+        self.currentImage=0
+        self.i0 = self.i0.convert()
+        self.i0.set_colorkey(WHITE)
+        #change the size of the wizard
+        self.i0 = pygame.transform.scale(self.i0, (80, 80))
+
+#wizard cordinates and screen color background
+wizard=Wizard1(70,300)
+screen.fill(WHITE)
+screen.blit(wizard.i0, (wizard.x, wizard.y))
+
+pygame.display.flip()
+
+#for when user wants to close screen
+def eventLoop():
+    while True:
+        eventList=pygame.event.get()
+        for event in eventList:
+            if event.type == pygame.QUIT:
+                exit()
+eventLoop()
+
