@@ -6,7 +6,7 @@ screen = pygame.display.set_mode((800, 500))
 
 # <<ADVANCED>> If you want KEYDOWN event to fire continuously, when a key is held down
 # ============ give it two argument, both of them are interval of KEYDOWN event
-# pygame.key.set_repeat(50, 50)
+#pygame.key.set_repeat(50, 50)
 
 #-------------------------
 # initialize the game
@@ -54,16 +54,16 @@ while True:
                     state = "Pause"
                 else:
                     state = "Normal"
-            #if event.key == pygame.K_SPACE:
-                #KEYDOWN Space should fire continously 
+            #elif event.key == pygame.K_SPACE:
+                #KEYDOWN Space should fire continously. Fxn that runs if the spacebar KEYUP is false
         if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP:
                 game.hero.vy == 0
-            if event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN:
                 game.hero.vy == 0
-            if event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT:
                 game.hero.vx == 0
-            if event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 game.hero.vx == 0
 
     #-------------------------
