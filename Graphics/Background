@@ -1,0 +1,38 @@
+import pygame
+
+
+pygame.init()
+
+BLUE = (0, 102, 255)
+BLACK = (0, 0, 0)
+ORANGE = (255, 153, 0)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+
+screen = pygame.display.set_mode((800,500))
+
+background =  pygame.Surface((200,200))
+#class for background, may change background later to something easier to see. 
+#I will try to get PS or PyxelEdit to do a diff background
+class Background:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.image = pygame.image.load("ActionGameProject/Graphics/space.png")
+        self.image = self.image.convert()
+        self.image = pygame.transform.scale(self.image, (800, 500))
+    
+space_back = Background(0, 0)
+screen.blit(space_back.image, (space_back.x, space_back.y))
+
+pygame.display.set_caption('Placeholder CHANGE LATER')
+
+pygame.display.flip()
+
+def eventLoop():
+    while True:
+        eventList=pygame.event.get()
+        for event in eventList:
+            if event.type == pygame.QUIT:
+                exit()
+eventLoop()
