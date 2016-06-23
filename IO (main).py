@@ -23,8 +23,6 @@ state = "Normal"
 #-------------------------
 # Our Main Loop
 #-------------------------
-## Your must have one and only one big while loop for your game
-## Each time the loop is executed, one framed
 while True:
     #-------------------------
     # Our event hanlding loop
@@ -37,7 +35,6 @@ while True:
         if event.type == pygame.QUIT:
             # if someone tries to close the Windows
             exit()
-        # TODO: replace the reset with your designed input
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 game.hero.vy -= 2
@@ -57,7 +54,7 @@ while True:
             #elif event.key == pygame.K_SPACE:
                 #KEYDOWN Space should fire continously. Fxn that runs if the spacebar KEYUP is false
         if event.type == pygame.KEYUP:
-            elif event.key == pygame.K_UP:
+            if event.key == pygame.K_UP:
                 game.hero.vy == 0
             elif event.key == pygame.K_DOWN:
                 game.hero.vy == 0
