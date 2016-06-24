@@ -18,7 +18,7 @@ game = Game()
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 #The game will probably begin at a state called "start_menu," or something along those lines. The game begins when the player clicks the start button, which changes the state to the "Normal," or
 #gameplay state
-state = "start_menu"
+state = "Normal"
 #I have put the starting state as "start_menu" as a place holder. Change this based on what the state for the start menu is called. 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 

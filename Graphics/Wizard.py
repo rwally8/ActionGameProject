@@ -10,6 +10,8 @@ class Wizard1(pygame.sprite.Sprite):
     def __init__(self,x,y):
         self.x=x
         self.y=y
+        self.vx=0
+        self.vy=0
         # import image
         self.image = pygame.image.load("ActionGameProject/Graphics/wizard.png")
         self.currentImage=0

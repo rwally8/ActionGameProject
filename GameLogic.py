@@ -15,7 +15,7 @@ class Hero:
         # ------------------------
         # TODO: add more properties to Hero based on your game
         self.vx = 0
-        self.vy = 0
+        self.vy = 10
 
     # an example of updating position of the object
     def update(self):
@@ -105,14 +105,14 @@ class Game:
         # initialize the timer to zero. This is like a little clock
         self.timer = 0
         self.hero = GLib.Wizard1(400,300)
-        self.ball = Ball(250, 250, GLib.ballSpriteBLUE)
+        self.background = GLib.Background(0,0)
         # TODO: add any variables you think will be needed as a property of Game
         # ...
         # ..
         # .
         # TODO: add any objects that you would like to be drawn on the screen
         # Make sure that all of those objects has x, y and img defined as their property
-        self.objectsOnScreen = [self.ball , self.hero]
+        self.objectsOnScreen = [self.background, self.hero]
     
 
 
@@ -134,9 +134,10 @@ class Game:
             # use showAnimationOn functon immported from Util module,
             # it taks three argument, the object to have animation, the animation, and the frameNumber
             # this example switch to the next frame every 5 ticks
-            showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
+            #showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
             # bounceIn(self.hero, 0, 0, 500, 500)
             wrapAroundIn(self.hero, 0, 0, 500, 500)
+        return state
 
     
     # A method that does all the drawing for you.
