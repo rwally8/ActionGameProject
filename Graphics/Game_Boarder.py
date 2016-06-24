@@ -40,12 +40,3 @@ surf = pygame.Surface((800, 7))
 surf.fill(WHITE)
 screen.blit(surf, (0, 110))
 
-pygame.display.flip()
-
-def eventLoop():
-    while True:
-        eventList=pygame.event.get()
-        for event in eventList:
-            if event.type == pygame.QUIT:
-                exit()
-eventLoop()
