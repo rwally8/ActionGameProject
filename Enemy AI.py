@@ -1,23 +1,19 @@
 import pygame
-import zellegraphics as zg
 import time
 import random
 import GraphicsLib
 
 class Enms:
     def __init__ (self):
-        import random
-        import pygame
         self.lives=[]
         self.enemies=[]
-        self.exst=[]
         self.wpn=[]
         self.xpos=[]
         self.ypos=[]
         self.resil=1
     def spawndcd(difficulty):
         EnLst=["grunt"]                             #Current list of all enemies except bosses
-        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Cur*rent list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
+        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Current list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
         whm=random.randint(0,0)                     #Change this if we add more enemies
         wpn=random.randint(0,2)                     #Change this if we add more enemy weapons
         seed=random.randint(1,5)                    #Determines the number of enemies spawned, which is then further modulated by the difficulty.
@@ -31,7 +27,6 @@ class Enms:
         self.resil=self.resil+(diff//5)
         if (diff//5)>=1:
             diff=0
-        self.exst.append(True)
         self.lives.append(resil)
         self.enemies.append(mtype)
         self.wpn.append(mweapon)
@@ -43,11 +38,18 @@ class Enms:
         for blt in pblltlst:
             enemynum=0
             for enmy in enmylst:
-                if Pygame.Rect.contains(pbltlst[bulltnum], self.enemies[enemynum])!=False:
+                if pygame.Rect.colliderect(pbltlst[bulltnum], self.enemies[enemynum])!=False:
                     self.lives[enemynum]-=1
                     if self.lives[enemynum]<=0:
-                        self.exst[enemynum]=False
-                    del pbltlst[bulltnum]      #removes player shots which hit the enemy, post damage.
+                        self.lives.remove(self.lives[enemynum])
+                        self.enemies.remove(self.lives[enemynum])
+                        self.wpn.remove(self.lives[enemynum])
+                        self.xpos.remove(self.lives[enemynum])
+                        self.ypos.remove(self.lives[enemynum])
+                        self.resil.remove(self.lives[enemynum])
+                        enemynum-=1
+                    pbltlst.remove(pbltlst[bulltnum])      #removes player shots which hit the enemy, post damage.
+                    bulltnum-=1
                 enemynum+=1
             bulltnum+=1
     def emovement (self, ennum, movedi):
