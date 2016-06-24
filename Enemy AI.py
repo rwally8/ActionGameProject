@@ -2,6 +2,7 @@ import pygame
 import zellegraphics as zg
 import time
 import random
+import GraphicsLib
 
 class Enms:
     def __init__ (self):

@@ -20,7 +20,7 @@ def render_smaller_text(word, x, y, font, color): #Function to render smaller te
     my_small_font = pygame.font.SysFont('arial', 36)
     new_label = my_small_font.render(word, 1, (color))
     screen.blit(new_label, (x, y))
-
+    
 def render_title_text(word, x, y, font, color): #Renders title text
     my_title_font = pygame.font.SysFont('arial', 80)
     title_label = my_title_font.render(word, 1, (color))
