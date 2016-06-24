@@ -16,7 +16,7 @@ class Enms:
         self.resil=1
     def spawndcd(difficulty):
         EnLst=["grunt"]                             #Current list of all enemies except bosses
-        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Current list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
+        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Cur*rent list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
         whm=random.randint(0,0)                     #Change this if we add more enemies
         wpn=random.randint(0,2)                     #Change this if we add more enemy weapons
         seed=random.randint(1,5)                    #Determines the number of enemies spawned, which is then further modulated by the difficulty.
@@ -25,7 +25,7 @@ class Enms:
         num=seed+(difficulty//1)                    #For this to work difficulty must always be an integer
         xval=800                                    #enum is the number of enemies
         ymod=(500/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
-        return(Etype, Ewpn, num, xval, ymod)
+        return(Etype, Ewpn, num, xval, ymod, difficulty)
     def spwnd (self, mtype, mweapon, xstrt, ystrt, diff):
         self.resil=self.resil+(diff//5)
         if (diff//5)>=1:
@@ -44,6 +44,8 @@ class Enms:
             for enmy in enmylst:
                 if Pygame.Rect.contains(pbltlst[bulltnum], self.enemies[enemynum])!=False:
                     self.lives[enemynum]-=1
+                    if self.lives[enemynum]<=0:
+                        self.exst[enemynum]=False
                     del pbltlst[bulltnum]      #removes player shots which hit the enemy, post damage.
                 enemynum+=1
             bulltnum+=1
