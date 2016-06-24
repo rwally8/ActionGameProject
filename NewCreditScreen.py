@@ -31,5 +31,7 @@ if newrendervariable == True:
     render_name_text("Ryan Walulik", 295, 190, "arial", red)
     render_name_text("Charles Villar", 290, 240, "arial", red)
     render_catapult_text("Created at Operation Catapult 2016", 260, 440, "arial", red)
+    render_catapult_text("Press ESC to go back.", 0, 0, "arial", red)
+    
 
 pygame.display.flip()
