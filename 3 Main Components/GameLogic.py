@@ -137,23 +137,8 @@ class Game:
             showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
             # bounceIn(self.hero, 0, 0, 500, 500)
             wrapAroundIn(self.hero, 0, 0, 500, 500)
-        elif state == "Pause":
-            # Switch to another state by return the state number
-            if self.timer - self.savedTime > 20:
-                return "Normal"
-        # TODO: add more state to the game
-        else:
-            print("Undefined game state " + str(state))
-            exit()
-        # return the same state if you decided not to switch a state
-        return state
 
     
-
-
-
-
-
     # A method that does all the drawing for you.
     def draw(self, screen):
         # The first line clear the screen

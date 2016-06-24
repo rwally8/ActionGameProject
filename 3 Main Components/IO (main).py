@@ -49,10 +49,9 @@ while True:
                 game.hero.vx += 2
             elif event.key == pygame.K_ESCAPE:
                 if state == "Normal":
-                    # you can add an arbitrary attributes of game in this way
-                    game.savedTime = game.timer
                     state = "Pause"
-                else:
+            elif event.key == pygame.K_ESCAPE:
+                if state == "Pause":
                     state = "Normal"
             elif event.key == pygame.K_SPACE:
                 game.bullet.vx -=3
