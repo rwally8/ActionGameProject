@@ -13,6 +13,7 @@ WHITE = (255, 255, 255)
 
 screen = pygame.display.set_mode((800, 600))
 space = pygame.Surface((800, 100))
+
 class Points:
     def __init__(self, x, y, font, size, color):
         self.x=x
@@ -20,6 +21,7 @@ class Points:
         self.size=size
         self.font=pygame.font.SysFont('monospace', 50)
         self.image = pygame.image.load("ActionGameProject/Graphics/space.png")
+
 
 x=0
 y=0
@@ -31,9 +33,12 @@ screen.blit(image, (x, y))
 space = pygame.image.load("ActionGameProject/Graphics/space.png")    
 font = pygame.font.SysFont('Sans', 50)
 text = font.render('Points:', True, WHITE)
-screen.blit(text, (550, 50))
+screen.blit(text, (500, 50))
 
 
+surf = pygame.Surface((800, 7))
+surf.fill(WHITE)
+screen.blit(surf, (0, 110))
 
 pygame.display.flip()
 
