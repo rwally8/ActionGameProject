@@ -1,24 +1,36 @@
 import pygame, sys
-from Background import *
-pygame.init()
+BLUE = (0, 102, 255)
+BLACK = (0, 0, 0)
+ORANGE = (255, 153, 0)
+RED = (255, 0, 0)
+WHITE = (255, 255, 255)
+
+class Background:
+     def __init__(self, x, y):
+         self.x=x
+         self.y=y
+         self.img = pygame.image.load("ActionGameProject/Graphics/space.png")
+         self.img = self.img.convert()
+         self.img = pygame.transform.scale(self.img, (800, 600))
 
 
 class Points:
-    def __init__(self, x, y, font, size, color):
-        self.x=x
-        self.y=y
-        self.size=size
+    def __init__(self):
+        self.x=500
+        self.y=50
         self.font=pygame.font.SysFont('monospace', 50)
-        self.image = pygame.image.load("ActionGameProject/Graphics/space.png")
+
+    def update(self, scoreNum):
+        self.img = self.font.render('Points:'+str(scoreNum), True, WHITE)
+
+
 
 if __name__ == "__main__":
-    rendertextvariable = True
 
-    BLACK = (0, 0, 0)
-    YELLOW = (255, 255, 0)
-    RED = (255, 0, 0)
-    GREEN = (0, 255, 40)
-    WHITE = (255, 255, 255)
+    
+    pygame.init()
+    
+    rendertextvariable = True
 
     screen = pygame.display.set_mode((800, 600))
     space = pygame.Surface((800, 100))

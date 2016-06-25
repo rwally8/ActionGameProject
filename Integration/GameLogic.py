@@ -1,6 +1,15 @@
 import pygame
 import GraphicsLib as GLib
+from Game_Boarder import Background, Points
+from Wizard import Wizard1
+from Enemy import Enemy
 from Util import *
+
+class Object:
+    def __init__(self, x ,y, img):
+        self.x = x
+        self.y = y
+        self.img = img
 
 # a great example of an object that can move on the screen
 class Hero:
@@ -109,16 +118,17 @@ class Enms:
 class Game:
     def __init__(self):
         # initialize the timer to zero. This is like a little clock
-        self.timer = 0
-        self.hero = GLib.Wizard1(400,300)
-        self.background = GLib.Background(0,0)
+        self.timer = self.stateTimer = 0
+        self.hero = Wizard1(400,300)
+        self.background = GLib.background
+        self.scoreBoard = Points()
         # TODO: add any variables you think will be needed as a property of Game
         # ...
         # ..
         # .
         # TODO: add any objects that you would like to be drawn on the screen
         # Make sure that all of those objects has x, y and img defined as their property
-        self.objectsOnScreen = [self.background, self.hero]
+        self.objectsOnScreen = []
     
 
 
@@ -134,12 +144,16 @@ class Game:
         self.timer += 1
         # check what state the game is at
         if state == "Start Menu":
-            pass
+            self.scoreBoard.update(100)
         if state == "Instructions":
             pass
         if state == "Credits":
             pass
         if state == "Game":
+            if self.stateTimer == 0:
+                # self.background = 
+                self.objectsOnScreen = [self.hero]
+                
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
@@ -152,11 +166,19 @@ class Game:
         return state
 
     
-    # A method that does all the drawing for you.
-    def draw(self, screen):
-        # The first line clear the screen
-        # TODO: if you want a differnt background, 
-            # you can replace the next line                     screen.blit(GLib.Background, (0, 0))
-        screen.fill(GLib.BLACK)
-        for obj in self.objectsOnScreen:
-            screen.blit(obj.img, (obj.x, obj.y))
+    def draw(game, screen):
+        # set the background of the game
+        if type(game.background) is tuple:
+            screen.fill(game.background)
+        else:
+            screen.blit(game.background, (0, 0))
+
+        # the magic that draw all the objects stored in objectsOnScreen onto the screen
+        stack = [game.objectsOnScreen]
+        while len(stack) > 0:
+            objectsLs = stack.pop()
+            for obj in objectsLs:
+                if type(obj) is list:
+                    stack.append(obj)
+                else:
+                    screen.blit(obj.img, (obj.x, obj.y))

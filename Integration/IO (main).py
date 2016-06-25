@@ -18,7 +18,7 @@ game = Game()
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 #The game will probably begin at a state called "start_menu," or something along those lines. The game begins when the player clicks the start button, which changes the state to the "Normal," or
 #gameplay state
-state = "Start Menu"
+preState = state = "Start Menu"
 #I have put the starting state as "start_menu" as a place holder. Change this based on what the state for the start menu is called. 
 #----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -124,6 +124,15 @@ while True:
                 game.hero.vx == 0
             elif event.key == pygame.K_RIGHT:
                 game.hero.vx == 0
+        if event.type == pygame.MOUSEBUTTONDOWN:
+           if state == "Start Menu":
+                x, y = event.pos
+                if ((x>=250)&(x<=510)&(y>=165)&(y<=220)):
+                    state="Game"
+                elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
+                    state="Instructions"
+                elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
+                    state="Credits"
         #These controls allow the player to stop moving in a direction by releasing a key, which is optimal for doging and aiming. It also makes it easier to change directions
         #If, for some reason, we do not want the player to be able to stop, remove these controls.
     #------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
@@ -132,9 +141,16 @@ while True:
     #-------------------------
     # The main game logic block
     #-------------------------
-    ## all the exciting interactive of objects happen here
-    ## game.updateInState() will return the next state
+    # check if either updateInState(...) or user input altered state
+    # initialized stateTimer to 0 to signal the begining of a new state
+    if state != preState:
+        game.stateTimer = 0
+    preState = state
+    ## all the exciting interactive of objects happen in updateGame()
     state = game.updateInState(state)
+    # update both timer and stateTimer, if the state changed, clear the stateTimer
+    game.timer += 1
+    game.stateTimer += 1
 
     #-------------------------
     # The graphics block
