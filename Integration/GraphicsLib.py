@@ -39,7 +39,7 @@ def render_title_text(word, x, y, font, color): #Renders title text
 
 background_start.fill(black) #Sets the background_start black to create a place to render text onto
 # if rendertextvariable == True: #Referring back to that statement from earlier to print the text.
-render_title_text("Sample Title", 210, 20, "arial", red)
+render_title_text("Wizard Rush", 210, 20, "arial", red)
 render_text("Start Game", 260, 160, "arial", red)
 render_smaller_text("Instructions", 200, 320, "arial", red)
 render_smaller_text("Credits", 480, 320, "arial", red)
@@ -86,6 +86,26 @@ def render_resume_text(word, x, y, font, color):
     Pause.blit(resume_label, (x, y))
 
 render_paused_text("Paused!", 260, 100, "arial", red) #Renders text with specific phrase, coordinates, font, size
-render_resume_text("Press [Insert Key] to continue!", 220, 280, "arial", red)
+render_resume_text("Press Escape to continue!", 220, 280, "arial", red)
+
+
+
+Instructions = pygame.Surface((800,600))
+def render_control_text(word, x, y, font, color):
+    my_control_font = pygame.font.SysFont('arial', 40)
+    control_label = my_control_font.render(word, 1, (color))
+    Instructions.blit(control_label, (x, y))
+
+def render_other_text(word, x, y, font, color):
+    my_other_text = pygame.font.SysFont('arial', 20, bold=False, italic=True)
+    other_label = my_other_text.render(word, 1, (color))
+    Instructions.blit(other_label, (x, y))
+
+#if somerendervariable == True:
+render_control_text("Controls:", 340, 80, "arial", red)
+render_control_text("Space bar - Shoot", 270, 160, "arial", red)
+render_control_text("Arrow keys - Movement", 232, 220, "arial", red)
+render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
+render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
 

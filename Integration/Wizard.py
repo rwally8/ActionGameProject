@@ -14,11 +14,11 @@ class Wizard1(pygame.sprite.Sprite):
         self.vy=0
         # import image
         self.img = pygame.image.load("ActionGameProject/Graphics/wizard.png")
-        self.currentImage=0
         self.img = self.img.convert()
+        self.img.set_alpha()
         self.img.set_colorkey(WHITE)
         #change the size of the wizard
-        self.img = pygame.transform.scale(self.img, (60, 60))
+        self.img = pygame.transform.scale(self.img, (50, 60))
         
     def update(self):
         # TODO: what else hero is going to do in each frame

@@ -24,7 +24,7 @@ class Hero:
         # ------------------------
         # TODO: add more properties to Hero based on your game
         self.vx = 0
-        self.vy = 10
+        self.vy = 0
 
     # an example of updating position of the object
     def update(self):
@@ -119,7 +119,7 @@ class Game:
     def __init__(self):
         # initialize the timer to zero. This is like a little clock
         self.timer = self.stateTimer = 0
-        self.hero = Wizard1(400,300)
+        self.hero = Wizard1(100,300)
         self.background = GLib.background_start
         self.scoreBoard = Points()
         E = []
@@ -150,7 +150,9 @@ class Game:
                 self.background = GLib.Pause
                 self.objectsOnScreen = []
         elif state == "Instructions":
-           pass
+           if self.stateTimer == 0:
+                self.background = GLib.Instructions
+                self.objectsOnScreen = []
         elif state == "Credits":
             if self.stateTimer == 0:
                 self.background = GLib.Credits
