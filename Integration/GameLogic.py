@@ -120,8 +120,9 @@ class Game:
         # initialize the timer to zero. This is like a little clock
         self.timer = self.stateTimer = 0
         self.hero = Wizard1(400,300)
-        self.background = GLib.background
+        self.background = GLib.background_start
         self.scoreBoard = Points()
+        E = []
         # TODO: add any variables you think will be needed as a property of Game
         # ...
         # ..
@@ -141,19 +142,25 @@ class Game:
         # the last added object is going to be on the top
     def updateInState(self, state):
         # increment the timer
-        self.timer += 1
         # check what state the game is at
         if state == "Start Menu":
-            self.scoreBoard.update(100)
-        if state == "Instructions":
-            pass
-        if state == "Credits":
-            pass
-        if state == "Game":
+            self.background = GLib.background_start
+        elif state == "Pause":
             if self.stateTimer == 0:
-                # self.background = 
-                self.objectsOnScreen = [self.hero]
-                
+                self.background = GLib.Pause
+                self.objectsOnScreen = []
+        elif state == "Instructions":
+           pass
+        elif state == "Credits":
+            if self.stateTimer == 0:
+                self.background = GLib.Credits
+                self.objectsOnScreen = []
+        elif state == "Game":
+            self.timer += 1
+            if self.stateTimer == 0:
+                self.background = GLib.background_game
+                self.objectsOnScreen = [self.hero, self.scoreBoard]
+                self.scoreBoard.update(100)
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
@@ -163,6 +170,8 @@ class Game:
             #showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
             # bounceIn(self.hero, 0, 0, 500, 500)
             wrapAroundIn(self.hero, 0, 0, 500, 500)
+        else:
+            raise Exception("Invalide state: " + str(state))
         return state
 
     

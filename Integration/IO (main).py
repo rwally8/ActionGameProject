@@ -12,7 +12,7 @@ from GameLogic import *
 
 # acquire a game object
 game = Game()
-
+pygame.key.set_repeat(1)
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
 #BEIGINING STATES
 #-----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -40,19 +40,22 @@ while True:
         if event.type == pygame.KEYDOWN:
             # "hero" is used here as the default class name, change the "game.hero" based on whatever the class for the players model is named
             if event.key == pygame.K_UP:
-                game.hero.vy -= 2
+                game.hero.y -= 2
             elif event.key == pygame.K_DOWN:
-                game.hero.vy += 2
+                game.hero.y += 2
             elif event.key == pygame.K_LEFT:
-                game.hero.vx -= 2
+                game.hero.x -= 2
             elif event.key == pygame.K_RIGHT:
-                game.hero.vx += 2
+                game.hero.x += 2
             elif event.key == pygame.K_ESCAPE:
-                if state == "Normal":
+                if state == "Game":
                     state = "Pause"
-            elif event.key == pygame.K_ESCAPE:
-                if state == "Pause":
-                    state = "Normal"
+                elif state == "Pause":
+                    state = "Game"                
+                elif state == "Credits":
+                    state = "Start Menu"
+                elif state == "Instruction":
+                    state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.bullet.vx -=3
                 #gives projectile a velocity when space is pressed.
@@ -60,31 +63,8 @@ while True:
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #FOR THE START MENU
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            elif event.key == pygame.K_p:
-                if state == "start_menu":
-                    state = "Normal"
-                    #By pressing "p" on the start menu, you will enter the "Normal" state and begin playing the game.
-            elif event.key == pygame.K_ESCAPE:
-                if state == "Normal":
-                    state = "start_menu"
-                    #This would give the player the option to quit back to the start menu by pressing the key "escape." This is something that we can remove if we do not want to give the option
-                    #to return to the main menu during the game. 
-            elif event.key == pygame.K_i:
-                if state == "start_menu":
-                    state = "Instruction"
-                    #By pressing the "i" key on the main menu you will enter the "Instruction" state and will be brought to the instructions page.
-            elif event.key == pygame.K_ESCAPE:
-                if state == "Instruction":
-                    state = "start_menu"
-                    #This gives the player the option to return to the start screen after entering the instructions state by pressing the key "escape"
-            elif event.key == pygame.K_o:
-                if state == "start_menu":
-                    state = "Credits"
-                    #By pressing the "o" key on the start menu, you will enter the "Credits" state, and will be brought to the credits page.
-            elif event.key == pygame.K_ESCAPE:
-                if state == "Credits":
-                    state = "start_menu"
-                    #By pressing the "escape" key, you will be taken back to the start menu if your state is "Credits."
+            
+                    #By pressing the "o" key on the start menu, you will enter the "Credits" state, and will be brought to the credits page.        
             #Using the mouse to select the option you want would be optimal, but this method of simply pressing keys to enter the desired state is much easier to 
             #implement. If we want to we can look to replace these settings with mouse control. This method also requires some aspects to be added to the start menu, such as 
             #parenthesis around the different options that signal which key to press
@@ -94,36 +74,19 @@ while True:
             #An alternative to using the escape function to return to the title screen would be to add an else statement to the comands for entering the different states,
             #much like the one implemented in the pause section. However, the escape key returning you to the title screen seems more logical.
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    #FOR EXTRA FEATURES IF TIME PERMITS
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            #If time permits, multiple different fire modes could be set to different states, and a key could be used to set the state to the desired fire mode.
-            #Fire mode implementation could look something like this
-            elif event.key == pygame.K_z:
-                state = "Normal"
-            elif event.key == pygame.K_x: 
-                state = "Fire2"
-            elif event.key == pygame.K_c:
-                state = "Fire3"
-            #This method may run into problems, mainly concerning the base fire mode. If the pause menu also deals with the state of normal, then after pausing you would be reset into fire mode 1, 
-            #even if you were in another fire mode before pausing. Also, because the first fire mode is going off the normal, or default, state of the game, all other fire modes would have to 
-            #contain the things that the normal state needs to run the game. 
-            #One potential solution may be different fire keys, each of which shoots a different projectile, but this does not seem ideal. 
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
     
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #CONTROLS THAT ALLOW THE PLAYER TO STOP
     #--------------------------------------------------------------------------------------------------------------------------------------------------------------------         
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
-                game.hero.vy == 0
-            elif event.key == pygame.K_DOWN:
-                game.hero.vy == 0
-            elif event.key == pygame.K_LEFT:
-                game.hero.vx == 0
-            elif event.key == pygame.K_RIGHT:
-                game.hero.vx == 0
+        # if event.type == pygame.KEYUP:
+        #     if event.key == pygame.K_UP:
+        #         game.hero.y == 0
+        #     elif event.key == pygame.K_DOWN:
+        #         game.hero.y == 0
+        #     elif event.key == pygame.K_LEFT:
+        #         game.hero.x == 0
+        #     elif event.key == pygame.K_RIGHT:
+        #         game.hero.x == 0
         if event.type == pygame.MOUSEBUTTONDOWN:
            if state == "Start Menu":
                 x, y = event.pos
