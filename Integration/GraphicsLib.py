@@ -42,6 +42,10 @@ background_start.fill(black) #Sets the background_start black to create a place 
 render_title_text("Wizard Rush", 210, 20, "arial", red)
 render_text("Start Game", 260, 160, "arial", red)
 render_smaller_text("Instructions", 200, 320, "arial", red)
+#
+render_title_text("Wizard Rush", 210, 20, "arial", red)
+render_text("Start Game", 260, 160, "arial", red)
+render_smaller_text("Instructions", 200, 320, "arial", red)
 render_smaller_text("Credits", 480, 320, "arial", red)
 
 

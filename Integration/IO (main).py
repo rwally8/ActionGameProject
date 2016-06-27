@@ -53,7 +53,7 @@ while True:
                     state = "Game"                
                 elif state == "Credits":
                     state = "Start Menu"
-                elif state == "Instructions":
+                elif state == "Instruction":
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.Fireball
@@ -63,7 +63,7 @@ while True:
                 if ((x>=250)&(x<=510)&(y>=165)&(y<=220)):
                     state="Game"
                 elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
-                    state="Instructions"
+                    state="Instruction"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
                     state="Credits"
        

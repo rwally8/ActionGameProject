@@ -17,5 +17,5 @@ class Enemy(pygame.sprite.Sprite):
         self.image.set_colorkey(WHITE)
         self.image = pygame.transform.scale(self.image, (60,60))
         self.image = pygame.transform.flip(self.image, True, False)
-
+pygame.display.flip()
 

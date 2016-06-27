@@ -18,4 +18,4 @@ y = 10
 
 screen.blit(herofireball, (x, y))
 pygame.display.flip()
-#pygame.time.wait(500)
+pygame.time.wait(500)
