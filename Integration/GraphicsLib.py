@@ -39,15 +39,9 @@ def render_title_text(word, x, y, font, color): #Renders title text
 
 background_start.fill(black) #Sets the background_start black to create a place to render text onto
 # if rendertextvariable == True: #Referring back to that statement from earlier to print the text.
-<<<<<<< Updated upstream
 render_title_text("Wizard Rush", 210, 20, "arial", red)
 render_text("Start Game", 260, 160, "arial", red)
 render_smaller_text("Instructions", 200, 320, "arial", red)
-=======
-render_title_text("Wizard Rush", 170, 20, "arial", red)
-render_text("Start Game", 240, 160, "arial", red)
-render_smaller_text("Instructions", 180, 320, "arial", red)
->>>>>>> Stashed changes
 render_smaller_text("Credits", 480, 320, "arial", red)
 
 
@@ -115,9 +109,9 @@ render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
 render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
 
-Fireball = pygame.Surface((20,20))
-pygame.draw.circle(Fireball, brightblue, (20, 20), 6)
-pygame.draw.polygon(Fireball, brightblue, ((20, 14), (8, 17), (20, 20)))
-pygame.draw.polygon(Fireball, brightblue, ((20, 17), (4, 20), (20, 23)))
-pygame.draw.polygon(Fireball, brightblue, ((20, 20), (8, 23), (20, 26)))
-pygame.draw.circle(Fireball, blue, (20, 20), 3)
+#Fireball = pygame.Surface((20,20))
+#pygame.draw.circle(Fireball, brightblue, (20, 20), 6)
+#pygame.draw.polygon(Fireball, brightblue, ((20, 14), (8, 17), (20, 20)))
+#pygame.draw.polygon(Fireball, brightblue, ((20, 17), (4, 20), (20, 23)))
+#pygame.draw.polygon(Fireball, brightblue, ((20, 20), (8, 23), (20, 26)))
+#pygame.draw.circle(Fireball, blue, (20, 20), 3)
