@@ -39,13 +39,13 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                game.hero.y -= 2
+                game.hero.y -= 10
             elif event.key == pygame.K_DOWN:
-                game.hero.y += 2
+                game.hero.y += 10
             elif event.key == pygame.K_LEFT:
-                game.hero.x -= 2
+                game.hero.x -= 10
             elif event.key == pygame.K_RIGHT:
-                game.hero.x += 2
+                game.hero.x += 10
             elif event.key == pygame.K_ESCAPE:
                 if state == "Game":
                     state = "Pause"

@@ -74,7 +74,7 @@ while True:
                     state = "Instruction"
                     #By pressing the "i" key on the main menu you will enter the "Instruction" state and will be brought to the instructions page.
             elif event.key == pygame.K_ESCAPE:
-                if state == "Instruction":
+                if state == "Instructions":
                     state = "start_menu"
                     #This gives the player the option to return to the start screen after entering the instructions state by pressing the key "escape"
             elif event.key == pygame.K_o:

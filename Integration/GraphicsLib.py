@@ -39,9 +39,15 @@ def render_title_text(word, x, y, font, color): #Renders title text
 
 background_start.fill(black) #Sets the background_start black to create a place to render text onto
 # if rendertextvariable == True: #Referring back to that statement from earlier to print the text.
+<<<<<<< Updated upstream
 render_title_text("Wizard Rush", 210, 20, "arial", red)
 render_text("Start Game", 260, 160, "arial", red)
 render_smaller_text("Instructions", 200, 320, "arial", red)
+=======
+render_title_text("Wizard Rush", 170, 20, "arial", red)
+render_text("Start Game", 240, 160, "arial", red)
+render_smaller_text("Instructions", 180, 320, "arial", red)
+>>>>>>> Stashed changes
 render_smaller_text("Credits", 480, 320, "arial", red)
 
 
