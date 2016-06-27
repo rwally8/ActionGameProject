@@ -55,8 +55,8 @@ while True:
                     state = "Start Menu"
                 elif state == "Instructions":
                     state = "Start Menu"
-            #elif event.key == pygame.K_SPACE:
-                #game.bullet.vx -=3
+            elif event.key == pygame.K_SPACE:
+                game.Fireball
         if event.type == pygame.MOUSEBUTTONDOWN:
             if state == "Start Menu":
                 x, y = event.pos

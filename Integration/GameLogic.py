@@ -32,6 +32,15 @@ class Hero:
         self.x += self.vx
         self.y += self.vy
 
+class Fireball:
+    def __init__(self, x ,y, img):
+        self.x = x
+        self.y = y
+        self.img = GLib.Fireball
+
+    def update (self):
+        self.x + 2 
+
 class Enms:
     def __init__ (self):
         self.lives=[]
@@ -193,3 +202,4 @@ class Game:
                     stack.append(obj)
                 else:
                     screen.blit(obj.img, (obj.x, obj.y))
+
