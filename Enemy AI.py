@@ -2,14 +2,50 @@ import pygame
 import time
 import random
 
+class Bullet:
+    def __init__(self,ammox,ammoy,velox,veloy):
+        self.xpos=ammox
+        self.ypos=ammoy
+        self.velocx=velox
+        self.velocy=veloy
+    def uppos(self):
+        self.xpos+=self.velocx
+        self.ypos+=self.velocy
+        
 class Enemynw:
-    def __init__(self):
-        self.lives=resil
-        self.entyp=mtype
-        self.wpn=mweapon
-        self.xpos=xstrt
-        self.ypos=ystrt
-        self.enm
+    def __init__(self,life,entype,weapon,exposition,whyposition):
+        self.lives=life
+        self.entyp=entype
+        self.wpn=weapon
+        self.xpos=exposition
+        self.ypos=whyposition
+        self.bltlst=[]
+
+    def fire (self):
+        ammox=self.xpos
+        ammoy=self.ypos
+        if self.wpn== "Firebolt":
+            velox=[1]
+            veloy=[0]
+            numb=1
+        elif self.wpn== "Fireblast":
+            velox=[1,1,1,1,1]
+            veloy=[ 1,.5,0,-.5,-1]
+            numb=5
+        elif self.wpn== "Aimfire":
+            velox=[(plrx-self.enemies[ennun].xpos)]
+            veloy=[(plry-self.enemies[ennun].xpos)]
+            numb=1
+        for i in range (numb):
+            nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
+            self.bltlst.append(nwbullet)
+'''
+e = Enemynw( ... )
+e.fire()
+e2 = Enemynw( ... )
+for e in list:
+    e.fire()
+'''
 
 class Enms:
     def __init__ (self):
@@ -26,13 +62,15 @@ class Enms:
         num=seed+(difficulty//1)
         xval=800                                    #enum is the number of enemies
         ymod=(500/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
-        return(Etype, Ewpn, num, xval, ymod, difficulty)
-    def spwnd (self, mtype, mweapon, xstrt, ystrt, diff):
-        self.resil=self.resil+(diff//5)
-        if (diff//5)>=1:
-            diff=0
-        Newen=Enemynw()
-        self.enemies.append(Newen)
+        self.resil=self.resil+(difficulty//5)
+        if (difficulty//5)>=1:
+            difficulty=0
+        for i in range (num):
+            yval=(i+1)*ymod
+            Newen=Enemynw(resil, whm, wpn,xval,yval)
+            self.enemies.append(Newen)
+
+'''
     def check (self, pblltlst):
         bulltnum=0
         for blt in pblltlst:
@@ -47,6 +85,14 @@ class Enms:
                     bulltnum-=1
                 enemynum+=1
             bulltnum+=1
+'''
+    def volly(self):
+        allxs=[]
+        allys=[]
+        allxvs=[]
+        allyvs=[]
+        for ship in self.enemies:
+            a=ship.fire()
     def emovement (self, ennum, movedi):
         strtx=0
         strty=0
@@ -62,19 +108,5 @@ class Enms:
             movedi="UP"
         self.enemies[ennum].ypos+=strty
         self.enemies[ennum].xpos+=strtx
-    def fire (self, ennum, plrx, plry):
-        ammox=self.enemies[ennum].xpos
-        ammoy=self.enemies[ennum].ypos
-        if self.enemies[ennum].wpn== "Firebolt":
-            velox=1
-            veloy=0
-            numb=1
-        elif self.enemies[ennum].wpn== "Fireblast":
-            velox=[1,1,1,1,1]
-            veloy=[ 1,.5,0,-.5,-1]
-            numb=5
-        elif self.wpn[ennum].wpn== "Aimfire":
-            velox=(plrx-self.enemies[ennun].xpos)
-            veloy=(plry-self.enemies[ennun].xpos)
-            numb=1
-        return(velox, veloy)
+        return(movedi)
+
