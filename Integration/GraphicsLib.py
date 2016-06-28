@@ -5,9 +5,6 @@ BLACK = (0, 0, 0)
 ORANGE = (255, 153, 0)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
-# from NewStartScreen import *
-# from PauseScreen import *
-# from CreditScreen import * 
 
 import pygame, sys
 pygame.init()
@@ -49,7 +46,7 @@ render_smaller_text("Instructions", 200, 320, "arial", red)
 render_smaller_text("Credits", 480, 320, "arial", red)
 
 
-background_game = pygame.image.load("ActionGameProject/Graphics/space.png")
+background_game = pygame.image.load("ActionGameProject/Graphics/stone_brick.png")
 background_game = background_game.convert()
 background_game = pygame.transform.scale(background_game, (800, 600))
 
@@ -113,9 +110,25 @@ render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
 render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
 
-#Fireball = pygame.Surface((20,20))
-#pygame.draw.circle(Fireball, brightblue, (20, 20), 6)
-#pygame.draw.polygon(Fireball, brightblue, ((20, 14), (8, 17), (20, 20)))
-#pygame.draw.polygon(Fireball, brightblue, ((20, 17), (4, 20), (20, 23)))
-#pygame.draw.polygon(Fireball, brightblue, ((20, 20), (8, 23), (20, 26)))
-#pygame.draw.circle(Fireball, blue, (20, 20), 3)
+Fireball = pygame.Surface((40,40))
+pygame.draw.circle(Fireball, BLUE, (20, 20), 6)
+pygame.draw.polygon(Fireball, BLUE, ((20, 14), (8, 17), (20, 20)))
+pygame.draw.polygon(Fireball, BLUE, ((20, 17), (4, 20), (20, 23)))
+pygame.draw.polygon(Fireball, BLUE, ((20, 20), (8, 23), (20, 26)))
+pygame.draw.circle(Fireball, BLUE, (20, 20), 3)
+Fireball.set_colorkey(BLACK)
+
+
+enemyfireball = pygame.Surface((40,40))
+pygame.draw.circle(enemyfireball, RED, (20, 20), 6)
+pygame.draw.polygon(enemyfireball, RED, ((20, 14), (32, 17), (20, 20)))
+pygame.draw.polygon(enemyfireball, RED, ((20, 17), (36, 20), (20, 23)))
+pygame.draw.polygon(enemyfireball, RED, ((20, 20), (32, 23), (20, 26)))
+pygame.draw.circle(enemyfireball, RED, (20, 20), 3)
+enemyfireball.set_colorkey(BLACK)
+
+enemyImage = pygame.image.load("ActionGameProject/Graphics/enemy1.png")
+enemyImage = enemyImage.convert()
+enemyImage.set_colorkey(WHITE)
+enemyImage = pygame.transform.scale(enemyImage, (50,60))
+enemyImage = pygame.transform.flip(enemyImage, True, False)

@@ -39,13 +39,13 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                game.hero.y -= 2
+                game.hero.y -= 5
             elif event.key == pygame.K_DOWN:
-                game.hero.y += 2
+                game.hero.y += 5
             elif event.key == pygame.K_LEFT:
-                game.hero.x -= 2
+                game.hero.x -= 5
             elif event.key == pygame.K_RIGHT:
-                game.hero.x += 2
+                game.hero.x += 5
             elif event.key == pygame.K_ESCAPE:
                 if state == "Game":
                     state = "Pause"
@@ -56,7 +56,7 @@ while True:
                 elif state == "Instruction":
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
-                game.Fireball
+                game.fire()
         if event.type == pygame.MOUSEBUTTONDOWN:
             if state == "Start Menu":
                 x, y = event.pos

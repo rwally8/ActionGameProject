@@ -4,6 +4,7 @@ from Game_Boarder import Background, Points
 from Wizard import Wizard1
 from Enemy import Enemy
 from Util import *
+import random
 
 class Object:
     def __init__(self, x ,y, img):
@@ -31,98 +32,67 @@ class Hero:
         # TODO: what else hero is going to do in each frame
         self.x += self.vx
         self.y += self.vy
+        wrapAroundIn(self, 0, 0, 500, 500)
 
 class Fireball:
-    def __init__(self, x ,y, img):
+    def __init__(self, x ,y):
         self.x = x
-        self.y = y
+        self.y = y + 30 
         self.img = GLib.Fireball
 
     def update (self):
-        self.x + 2 
+        self.x += 10
 
-class Enms:
-    def __init__ (self):
-        self.lives=[]
-        self.enemies=[]
-        self.wpn=[]
-        self.xpos=[]
-        self.ypos=[]
-        self.resil=1
-    def spawndcd(difficulty):
-        EnLst=["grunt"]                             #Current list of all enemies except bosses
-        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Current list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
-        whm=random.randint(0,0)                     #Change this if we add more enemies
-        wpn=random.randint(0,2)                     #Change this if we add more enemy weapons
-        seed=random.randint(1,5)                    #Determines the number of enemies spawned, which is then further modulated by the difficulty.
-        Etype=EnLst[whm]
-        Ewpn=WpnLst[wpn]
-        num=seed+(difficulty//1)                    #For this to work difficulty must always be an integer
-        xval=800                                    #enum is the number of enemies
-        ymod=(500/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
-        return(Etype, Ewpn, num, xval, ymod, difficulty)
-    def spwnd (self, mtype, mweapon, xstrt, ystrt, diff):
-        self.resil=self.resil+(diff//5)
-        if (diff//5)>=1:
-            diff=0
-        self.lives.append(resil)
-        self.enemies.append(mtype)
-        self.wpn.append(mweapon)
-        self.xpos.append(xstrt)
-        self.ypos.append(ystrt)
-        self.enemies.append(mtype)
-    def check (self, pblltlst):
-        bulltnum=0
-        for blt in pblltlst:
-            enemynum=0
-            for enmy in enmylst:
-                if pygame.Rect.colliderect(pbltlst[bulltnum], self.enemies[enemynum])!=False:
-                    self.lives[enemynum]-=1
-                    if self.lives[enemynum]<=0:
-                        self.lives.remove(self.lives[enemynum])
-                        self.enemies.remove(self.lives[enemynum])
-                        self.wpn.remove(self.lives[enemynum])
-                        self.xpos.remove(self.lives[enemynum])
-                        self.ypos.remove(self.lives[enemynum])
-                        self.resil.remove(self.lives[enemynum])
-                        enemynum-=1
-                    pbltlst.remove(pbltlst[bulltnum])      #removes player shots which hit the enemy, post damage.
-                    bulltnum-=1
-                enemynum+=1
-            bulltnum+=1
-    def emovement (self, ennum, movedi):
-        strtx=0
-        strty=0
-        if (self.xpos[ennum]>=100):
-            strtx=strtx-1
-        if ((self.ypos[ennum]>0)&(movedi=="UP")):
-            strty=strty-1
-        elif ((self.ypos[ennum]<=0)&(movedi=="UP")):
-            movedi="DOWN"
-        elif ((self.ypos[ennum]<500)&(movedi=="DOWN")):
-            strty=strty+1
-        elif ((self.ypos[ennum]>=500)&(movedi=="DOWN")):
-            movedi="UP"
-        self.ypos[ennum]+=strty
-        self.xpos[ennum]+=strtx
-    def fire (self, ennum, plrx, plry):
-        ammox=self.xpos[ennum]
-        ammoy=self.ypos[ennum]
-        if self.wpn[ennum]== "Firebolt":
-            velox=1
-            veloy=0
+class Bullet:
+    def __init__(self,ammox,ammoy,velox,veloy):
+        self.img = GLib.enemyfireball
+        self.x =ammox
+        self.y =ammoy
+        self.vx = velox
+        self.vy = veloy
+
+    def uppos(self):
+        self.x +=self.vx
+        self.y +=self.vy
+        
+class Enemynw:
+    def __init__(self,life,entype,weapon,exposition,whyposition):
+        self.lives=life
+        self.entyp=entype
+        self.wepn=weapon
+        self.x =exposition
+        self.y =whyposition
+        self.vx = -10
+        self.vy = 10
+        self.img = GLib.enemyImage
+        self.bltlst=[]
+
+    def fire (self,plrx, plry):
+        ammox=self.x 
+        ammoy=self.y 
+        if self.wepn== "Firebolt":
+            velox=[10]
+            veloy=[0]
             numb=1
-        elif self.wpn[ennum]== "Fireblast":
-            velox=[1,1,1,1,1]
-            veloy=[ 1,.5,0,-.5,-1]
+        elif self.wepn== "Fireblast":
+            velox=[10,10,10,10,10]
+            veloy=[ 10,5,0,-5,-10]
             numb=5
-        elif self.wpn[ennum]== "Aimfire":
-            velox=(plrx-self.xpos[ennun])
-            veloy=(plry-self.ypos[ennun])
+        elif self.wepn== "Aimfire":
+            velox=[-(plrx-self.x)/20]
+            veloy=[-(plry-self.y)/20]
             numb=1
-        return(velox, veloy)
+        for i in range(numb):
+            nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
+            self.bltlst.append(nwbullet)
 
-
+    def update(self):
+        self.x += self.vx
+        self.y += self.vy
+        bounceIn(self, 0, 0, 800, 600)
+        for i in range (len(self.bltlst)):
+            self.bltlst[i].x-=self.bltlst[i].vx
+            self.bltlst[i].y-=self.bltlst[i].vy
 
 class Game:
     def __init__(self):
@@ -131,7 +101,10 @@ class Game:
         self.hero = Wizard1(100,300)
         self.background = GLib.background_start
         self.scoreBoard = Points()
-        E = []
+        self.resil = 0
+        self.enemyLs = []
+        self.fireballLs = []
+        self.enemiesBullets = []
         # TODO: add any variables you think will be needed as a property of Game
         # ...
         # ..
@@ -140,6 +113,32 @@ class Game:
         # Make sure that all of those objects has x, y and img defined as their property
         self.objectsOnScreen = []
     
+    def fire (self):
+        x = self.hero.x
+        y = self.hero.y
+        self.fireballLs.append(Fireball(x, y))
+
+    def spawndcd(self, difficulty):
+        EnLst=["grunt"]                             #Current list of all enemies except bosses
+        WpnLst=["Firebolt","Fireblast","Aimfire"]   #Current list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
+        whm=random.randint(0,0)                     #Change this if we add more enemies
+        wpn=random.randint(0,2)                     #Change this if we add more enemy weapons
+        seed=random.randint(1,5)                    #Determines the number of enemies spawned, which is then further modulated by the difficulty.
+        Etype=EnLst[whm]
+        Ewpn=WpnLst[wpn]
+        num=seed+(difficulty//1)
+        xval=700                                    #enum is the number of enemies
+        ymod=(600/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
+        self.resil=self.resil+(difficulty//5)
+        if (difficulty//5)>=1:
+            difficulty=0
+        for i in range (num):
+            yval=(i+1)*ymod
+            Newen=Enemynw(self.resil, Etype, Ewpn,xval,yval)
+            Newen.fire(self.hero.x,self.hero.y)
+            self.enemyLs.append(Newen)
+            self.enemiesBullets.extend(Newen.bltlst)
+            #print (self.enemiesBullets)
 
 
     # Try to update all the elements
@@ -170,17 +169,29 @@ class Game:
             self.timer += 1
             if self.stateTimer == 0:
                 self.background = GLib.background_game
-                self.objectsOnScreen = [self.hero, self.scoreBoard]
+                self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets]
                 self.scoreBoard.update(100)
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
+            for f in self.fireballLs:
+                f.update()
+            for e in self.enemyLs:
+                e.update()
+            for e in self.enemyLs:
+                for f in self.fireballLs:
+                    if hasCollideCirc(e, f, 10):
+                        self.fireballLs.remove(f)
+                        self.enemyLs.remove(e)
+            if self.timer % 50 == 0:
+                self.spawndcd(5)
+                for e in self.enemyLs:
+                    e.fire(self.hero.x,self.hero.y)
             # use showAnimationOn functon immported from Util module,
             # it taks three argument, the object to have animation, the animation, and the frameNumber
             # this example switch to the next frame every 5 ticks
             #showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
             # bounceIn(self.hero, 0, 0, 500, 500)
-            wrapAroundIn(self.hero, 0, 0, 500, 500)
         else:
             raise Exception("Invalide state: " + str(state))
         return state
@@ -198,8 +209,8 @@ class Game:
         while len(stack) > 0:
             objectsLs = stack.pop()
             for obj in objectsLs:
+                #print(type(obj))
                 if type(obj) is list:
                     stack.append(obj)
                 else:
                     screen.blit(obj.img, (obj.x, obj.y))
-
