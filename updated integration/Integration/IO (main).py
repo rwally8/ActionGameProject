@@ -76,15 +76,16 @@ while True:
             if state == "Start Menu":
                 x, y = event.pos
                 if ((x>=250)&(x<=510)&(y>=165)&(y<=220)):
+                    game = Game()
                     state="Game"
                     pygame.mixer.music.stop()
                 elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
                     state="Instructions"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
                     state="Credits"
-       
 
-    print(state)
+
+    # print(state)
     #-------------------------
     # The main game logic block
     #-------------------------

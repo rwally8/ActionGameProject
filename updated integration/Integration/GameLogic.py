@@ -19,17 +19,24 @@ class Health:
         self.y = 25
         self.health = 3
         self.img = GLib.heart3
+        self.lastHttenTime = 0
 
     def update(self):
         if self.health == 2:
             self.img = GLib.heart2
-        if self.health == 1:
+        elif self.health == 3:
+            self.img = GLib.heart3
+        elif self.health == 1:
             self.img = GLib.heart1
-        if self.health == 0:
-            state = "Game Over"
+        else:
+            raise Exception( str(self.health) )
         
-        
-
+    def hitten(self, time):
+        print("last hitten" , self.lastHttenTime, time)
+        if time - self.lastHttenTime > 100:
+            print("heath" , self.health)
+            self.health -= 1
+            self.lastHttenTime = time
 
 
 class Wizard1:
@@ -43,7 +50,6 @@ class Wizard1:
         #change the size of the wizard
         
     def update(self):
-        print("ok")
         self.x += self.vx
         self.y += self.vy
         bounceIn(self, 0, 100, 200, 600)
@@ -119,7 +125,7 @@ class Game:
         self.timer = self.stateTimer = 0
         self.hero = Wizard1(100,300)
         self.background = GLib.background_start
-        self.heathPoint = Health()
+        self.healthPoint = Health()
         self.scoreBoard = Points()
         self.resil = 1
         self.enemyLs = []
@@ -206,12 +212,12 @@ class Game:
             self.timer += 1
             if self.stateTimer == 0:
                 self.background = GLib.background_game
-                self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets, self.heathPoint]
+                self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets, self.healthPoint]
             self.scoreBoard.update()
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
-            self.heathPoint.update()
+            self.healthPoint.update()
             for f in self.fireballLs:
                 f.update()
             for e in self.enemyLs:
@@ -225,7 +231,9 @@ class Game:
                             self.enemyLs.remove(e)
             for b in self.enemiesBullets:
                 if hasCollideCirc(b, self.hero, 10):
-                    self.heathPoint.health -= 1
+                    self.healthPoint.hitten(self.timer)
+                    if self.healthPoint.health == 0:
+                        return "Game Over"
 
 
             if self.first==True:
