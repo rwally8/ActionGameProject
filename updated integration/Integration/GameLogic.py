@@ -239,6 +239,7 @@ class Game:
                             self.enemyLs.remove(e)
             for b in self.enemiesBullets:
                 if hasCollideRect(b, self.hero):
+                    self.enemiesBullets.remove(b)
                     self.healthPoint.hitten(self.timer)
                     if self.healthPoint.health == 0:
                         return "Game Over"
