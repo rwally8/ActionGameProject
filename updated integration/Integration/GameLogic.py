@@ -68,7 +68,7 @@ class Fireball:
         self.img = GLib.Fireball
 
     def update (self):
-        self.x += 10
+        self.x += 20
 
 class Bullet:
     def __init__(self,ammox,ammoy,velox,veloy):
