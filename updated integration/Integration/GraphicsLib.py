@@ -111,7 +111,7 @@ def render_other_text(word, x, y, font, color):
 #if somerendervariable == True:
 render_control_text("Controls:", 340, 80, "arial", red)
 render_control_text("Space bar - Shoot", 270, 160, "arial", red)
-render_control_text("Arrow keys - Movement", 232, 220, "arial", red)
+render_control_text("Arrow keys and WASD- Movement", 180, 220, "arial", red)
 render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
 render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
