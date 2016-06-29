@@ -57,7 +57,7 @@ while True:
                     state = "Game"                
                 elif state == "Credits":
                     state = "Start Menu"
-                elif state == "Instruction":
+                elif state == "Instructions":
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.fire()
@@ -68,7 +68,7 @@ while True:
                     state="Game"
                     pygame.mixer.music.stop()
                 elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
-                    state="Instruction"
+                    state="Instructions"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
                     state="Credits"
        

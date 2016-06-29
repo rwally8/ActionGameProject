@@ -20,13 +20,13 @@ background_start = background_start.convert()
 
 fireball = pygame.mixer.Sound("ActionGameProject/fireball.wav")
 def render_text(word, x, y, font, color): #Function to render text. includes specific phrase, coordinates and color.
-    my_font = pygame.font.SysFont('arial',60)
+    my_font = pygame.font.SysFont('comicsansms',60)
     label = my_font.render(word, 1, (color))
     background_start.blit(label, (x, y))
     label.set_colorkey(black)
 
 def render_smaller_text(word, x, y, font, color): #Function to render smaller text.
-    my_small_font = pygame.font.SysFont('arial', 36)
+    my_small_font = pygame.font.SysFont('comicsansms', 36)
     new_label = my_small_font.render(word, 1, (color))
     new_label.set_colorkey(black)
     background_start.blit(new_label, (x, y))
