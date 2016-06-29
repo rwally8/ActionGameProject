@@ -79,7 +79,7 @@ while True:
                     game = Game()
                     state="Game"
                     pygame.mixer.music.stop()
-                elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
+                elif ((x>=180)&(x<=390)&(y>=325)&(y<=360)):
                     state="Instructions"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
                     state="Credits"
