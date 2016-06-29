@@ -52,7 +52,7 @@ class Wizard1:
     def update(self):
         self.x += self.vx
         self.y += self.vy
-        bounceIn(self, 0, 100, 200, 600)
+        bounceIn(self, 0, 100, 350, 600)
 
 class Fireball:
     def __init__(self, x ,y):
@@ -116,7 +116,7 @@ class Enemynw:
         elif self.up==False:
             self.x += self.vx
             self.y += self.vy
-        bounceIn(self, 200, 0, 800, 600)
+        bounceIn(self, 350, 0, 800, 600)
         
         
 class Game:
@@ -175,7 +175,7 @@ class Game:
             #self.enemiesBullets=[]
             #for i in range (len(self.enemyLs)):
             #    self.enemiesBullets.extend(self.enemyLs[i].bltlst)
-            self.enemiesBullets.extend(Newen.bltlst)
+            #self.enemiesBullets.extend(Newen.bltlst)
             #print (self.enemiesBullets)
 
 
@@ -217,6 +217,7 @@ class Game:
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
+            showAnimationOn(self.hero, GLib.wizard_animation, self.timer/10)
             self.healthPoint.update()
             for f in self.fireballLs:
                 f.update()
@@ -230,7 +231,7 @@ class Game:
                             self.scoreBoard.score += 1
                             self.enemyLs.remove(e)
             for b in self.enemiesBullets:
-                if hasCollideCirc(b, self.hero, 10):
+                if hasCollideRect(b, self.hero):
                     self.healthPoint.hitten(self.timer)
                     if self.healthPoint.health == 0:
                         return "Game Over"

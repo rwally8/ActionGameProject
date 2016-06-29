@@ -143,8 +143,15 @@ wizardHero = pygame.image.load("ActionGameProject/Graphics/wizard.png")
 wizardHero = pygame.transform.scale(wizardHero, (50,60))
 wizardHero = wizardHero.convert()
 wizardHero.set_alpha()
-wizardHero.set_colorkey(WHITE)
+wizardHero.set_colorkey(BLACK)
 
+wizardHero2 = pygame.image.load("ActionGameProject/Graphics/wizard2.png")
+wizardHero2 = pygame.transform.scale(wizardHero2, (50,60))
+wizardHero2.set_alpha()
+wizardHero2.set_colorkey(BLACK)
+wizardHero2 = wizardHero2.convert()
+
+wizard_animation = [wizardHero, wizardHero2]
 
 heart3 =pygame.Surface((300,100))
 red = (255, 0, 0)
