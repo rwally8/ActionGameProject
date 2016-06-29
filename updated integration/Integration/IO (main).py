@@ -110,5 +110,5 @@ while True:
     #-------------------------
     pygame.display.flip()
     # ask pygame to display everythong on the GUI
-    pygame.time.wait(10)
+    pygame.time.wait(20)
     # delay the time, so can see the Windows, controls the frame rate   

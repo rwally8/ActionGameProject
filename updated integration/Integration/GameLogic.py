@@ -45,6 +45,7 @@ class Wizard1:
         self.y=y
         self.vx=0
         self.vy=0
+        self.lastFiredTIme = 0
         # import image
         self.img = GLib.wizardHero
         #change the size of the wizard
@@ -54,6 +55,12 @@ class Wizard1:
         self.y += self.vy
         bounceIn(self, 0, 100, 350, 600)
 
+
+    def fire(self, time):
+        if time - self.lastFiredTIme > 30:
+            self.lastFiredTIme = time
+            return Fireball(self.x, self.y)
+        
 class Fireball:
     def __init__(self, x ,y):
         self.x = x
@@ -143,10 +150,10 @@ class Game:
         self.swtcerup=True
     
     def fire (self):
-        x = self.hero.x
-        y = self.hero.y
-        self.fireballLs.append(Fireball(x, y))
-        GLib.fireball.play()
+        fireball = self.hero.fire(self.timer)
+        if fireball:
+            self.fireballLs.append(fireball)
+            GLib.fireball.play()
 
     def spawndcd(self, difficulty):
         EnLst=["grunt"]                             #Current list of all enemies except bosses
