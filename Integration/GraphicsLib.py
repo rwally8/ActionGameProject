@@ -14,8 +14,11 @@ yellow = (255, 255, 0) #List of different colors
 red = (255, 0, 0)
 green = (0, 255, 40)
 
-background_start = pygame.Surface((800, 600))
-    
+background_start = pygame.image.load("ActionGameProject/Graphics/start_back.png")
+background_start = pygame.transform.scale(background_start, (800, 600))
+background_start = background_start.convert()
+
+fireball = pygame.mixer.Sound("ActionGameProject/fireball.wav")
 def render_text(word, x, y, font, color): #Function to render text. includes specific phrase, coordinates and color.
     my_font = pygame.font.SysFont('arial',60)
     label = my_font.render(word, 1, (color))
@@ -29,18 +32,13 @@ def render_smaller_text(word, x, y, font, color): #Function to render smaller te
     background_start.blit(new_label, (x, y))
     
 def render_title_text(word, x, y, font, color): #Renders title text
-    my_title_font = pygame.font.SysFont('arial', 80)
+    my_title_font = pygame.font.SysFont('comicsansms', 80)
     title_label = my_title_font.render(word, 1, (color))
     background_start.blit(title_label, (x, y))
     title_label.set_colorkey(black)
 
-background_start.fill(black) #Sets the background_start black to create a place to render text onto
-# if rendertextvariable == True: #Referring back to that statement from earlier to print the text.
-render_title_text("Wizard Rush", 210, 20, "arial", red)
-render_text("Start Game", 260, 160, "arial", red)
-render_smaller_text("Instructions", 200, 320, "arial", red)
-#
-render_title_text("Wizard Rush", 210, 20, "arial", red)
+
+render_title_text("Wizard Rush", 200, 20, "arial", red)
 render_text("Start Game", 260, 160, "arial", red)
 render_smaller_text("Instructions", 200, 320, "arial", red)
 render_smaller_text("Credits", 480, 320, "arial", red)

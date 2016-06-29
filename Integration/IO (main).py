@@ -1,9 +1,17 @@
 import pygame
+<<<<<<< HEAD
 import time
+=======
+from pygame import mixer
+>>>>>>> origin/master
 pygame.init()
 
 screen = pygame.display.set_mode((800, 600))
 
+pygame.mixer.init()
+screen = pygame.display.set_mode((800, 600))
+start_sound = pygame.mixer.music.load("ActionGameProject/desertm.wav")
+pygame.mixer.music.play(-1)
 #-------------------------
 # initialize the game
 #-------------------------
@@ -62,6 +70,7 @@ while True:
                 x, y = event.pos
                 if ((x>=250)&(x<=510)&(y>=165)&(y<=220)):
                     state="Game"
+                    pygame.mixer.music.stop()
                 elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
                     state="Instruction"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
@@ -108,5 +117,5 @@ while True:
     #-------------------------
     pygame.display.flip()
     # ask pygame to display everythong on the GUI
-    pygame.time.wait(100)
+    pygame.time.wait(10)
     # delay the time, so can see the Windows, controls the frame rate
