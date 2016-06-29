@@ -189,7 +189,9 @@ pygame.draw.circle(heart1, red, (30, 10), 10)
 pygame.draw.polygon(heart1, red, ((0, 10), (40, 10), (20, 30)))
 
 
-Game_Over = pygame.Surface((800,600))
+Game_Over = pygame.image.load("ActionGameProject/Graphics/start_back.png")
+Game_Over = pygame.transform.scale(Game_Over, (800, 600))
+Game_Over = Game_Over.convert()
 def render_death_text(word, x, y, font, color):
     my_death_font = pygame.font.SysFont('arial', 80, bold=True)
     death_label = my_death_font.render(word, 1, (color))
