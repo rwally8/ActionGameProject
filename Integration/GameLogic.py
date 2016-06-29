@@ -82,7 +82,7 @@ class Enemynw:
             numb=5
         elif self.wepn== "Aimfire":
             velox=[-(plrx-self.x)/20]
-            veloy=[-(plry-self.y)/20]
+            veloy=[(plry-self.y)/20]
             numb=1
         for i in range(numb):
             nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
@@ -126,18 +126,19 @@ class Game:
         x = self.hero.x
         y = self.hero.y
         self.fireballLs.append(Fireball(x, y))
+        GLib.fireball.play()
 
     def spawndcd(self, difficulty):
         EnLst=["grunt"]                             #Current list of all enemies except bosses
         WpnLst=["Firebolt","Fireblast","Aimfire"]   #Current list of all weapons except boss weapons, they are single forward shot, scatter shot, and targeted shot respectively, they do not require new art, but each one will have slightly different behavior programming.
         whm=random.randint(0,0)                     #Change this if we add more enemies
         wpn=random.randint(0,2)                     #Change this if we add more enemy weapons
-        seed=random.randint(1,5)                    #Determines the number of enemies spawned, which is then further modulated by the difficulty.
         Etype=EnLst[whm]
         Ewpn=WpnLst[wpn]
-        num=seed+(difficulty//1)
-        xval=700                                    #enum is the number of enemies
-        ymod=(600/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
+        num=1
+        rndspwn=10*(.00001+random.random())
+        xval=800                                    #enum is the number of enemies
+        ymod=(600/(rndspwn+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
         self.resil=self.resil+(difficulty//5)
         if (difficulty//5)>=1:
             difficulty=1
@@ -151,6 +152,9 @@ class Game:
                 self.swtcerup=True
             Newen.fire(self.hero.x,self.hero.y)
             self.enemyLs.append(Newen)
+            #self.enemiesBullets=[]
+            #for i in range (len(self.enemyLs)):
+            #    self.enemiesBullets.extend(self.enemyLs[i].bltlst)
             self.enemiesBullets.extend(Newen.bltlst)
             #print (self.enemiesBullets)
 
@@ -201,11 +205,12 @@ class Game:
             if self.first==True:
                 self.prirtimor=self.timer
                 self.first=False
-            elif self.timer-self.prirtimor>=30:                    #change post testing
+            elif self.timer-self.prirtimor>=50:                    #change post testing
                 self.spawndcd(4)                                    #this will eventually need a variable to hold difficulty, instead of being a constant
                 self.prirtimor=self.timer                     
                 for e in self.enemyLs:
                     e.fire(self.hero.x,self.hero.y)
+                    self.enemiesBullets.extend(e.bltlst)
             for i in self.enemiesBullets:
                 i.update()
             # use showAnimationOn functon immported from Util module,
