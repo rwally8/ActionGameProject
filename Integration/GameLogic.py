@@ -184,7 +184,7 @@ class Game:
             if self.stateTimer == 0:
                 self.background = GLib.background_game
                 self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets]
-                self.scoreBoard.update(100)
+                self.scoreBoard.update(0)
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
@@ -194,14 +194,15 @@ class Game:
                 e.update()
             for e in self.enemyLs:
                 for f in self.fireballLs:
-                    if hasCollideCirc(e, f, 10):
+                    if hasCollideCirc(e, f, 5):
                         self.fireballLs.remove(f)
                         if e in self.enemyLs:
                             self.enemyLs.remove(e)
+                            #self.scoreBoard.update(x)
             if self.first==True:
                 self.prirtimor=self.timer
                 self.first=False
-            elif self.timer-self.prirtimor>=30:                    #change post testing
+            elif self.timer-self.prirtimor>=50:                    #change post testing
                 self.spawndcd(4)                                    #this will eventually need a variable to hold difficulty, instead of being a constant
                 self.prirtimor=self.timer                     
                 for e in self.enemyLs:

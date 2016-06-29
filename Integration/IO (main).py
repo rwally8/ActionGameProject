@@ -1,5 +1,5 @@
 import pygame
-
+import time
 pygame.init()
 
 screen = pygame.display.set_mode((800, 600))
@@ -39,13 +39,13 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                game.hero.y -= 5
+                game.hero.y -= 15
             elif event.key == pygame.K_DOWN:
-                game.hero.y += 5
+                game.hero.y += 15
             elif event.key == pygame.K_LEFT:
-                game.hero.x -= 5
+                game.hero.x -= 15
             elif event.key == pygame.K_RIGHT:
-                game.hero.x += 5
+                game.hero.x += 15
             elif event.key == pygame.K_ESCAPE:
                 if state == "Game":
                     state = "Pause"

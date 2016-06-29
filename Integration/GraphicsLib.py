@@ -127,7 +127,7 @@ pygame.draw.polygon(enemyfireball, RED, ((20, 20), (32, 23), (20, 26)))
 pygame.draw.circle(enemyfireball, RED, (20, 20), 3)
 enemyfireball.set_colorkey(BLACK)
 
-enemyImage = pygame.image.load("ActionGameProject/Graphics/enemy1.png")
+enemyImage = pygame.image.load("ActionGameProject/Graphics/enemy2.png")
 enemyImage = enemyImage.convert()
 enemyImage.set_colorkey(WHITE)
 enemyImage = pygame.transform.scale(enemyImage, (50,60))
