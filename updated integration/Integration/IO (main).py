@@ -42,6 +42,15 @@ while True:
             # if someone tries to close the Windows
             exit()
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                game.hero.y -= 5
+            elif event.key == pygame.K_s:
+                game.hero.y +=5
+            elif event.key == pygame.K_a:
+                game.hero.x -= 5
+            elif event.key == pygame.K_d:
+                game.hero.x += 5
+        if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 game.hero.y -= 5
             elif event.key == pygame.K_DOWN:
@@ -58,8 +67,11 @@ while True:
                 elif state == "Credits":
                     state = "Start Menu"
                 elif state == "Instructions":
+<<<<<<< HEAD
                     state = "Start Menu"
                 elif state == "Game Over":
+=======
+>>>>>>> origin/master
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.fire()

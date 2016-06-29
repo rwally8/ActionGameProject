@@ -20,13 +20,13 @@ background_start = background_start.convert()
 
 fireball = pygame.mixer.Sound("ActionGameProject/fireball.wav")
 def render_text(word, x, y, font, color): #Function to render text. includes specific phrase, coordinates and color.
-    my_font = pygame.font.SysFont('arial',60)
+    my_font = pygame.font.SysFont('comicsansms',60)
     label = my_font.render(word, 1, (color))
     background_start.blit(label, (x, y))
     label.set_colorkey(black)
 
 def render_smaller_text(word, x, y, font, color): #Function to render smaller text.
-    my_small_font = pygame.font.SysFont('arial', 36)
+    my_small_font = pygame.font.SysFont('comicsansms', 36)
     new_label = my_small_font.render(word, 1, (color))
     new_label.set_colorkey(black)
     background_start.blit(new_label, (x, y))
@@ -49,7 +49,10 @@ background_game = background_game.convert()
 background_game = pygame.transform.scale(background_game, (800, 600))
 
 
-Credits = pygame.Surface ((800,600))
+Credits = pygame.image.load("ActionGameProject/Graphics/start_back.png")
+Credits = pygame.transform.scale(Credits, (800, 600))
+Credits = Credits.convert()
+Credits.set_colorkey()
 def render_creator_text(word, x, y, font, color): #Renders font the Creators text
     my_creator_font = pygame.font.SysFont('arial', 40, bold=True)
     creator_label = my_creator_font.render(word, 1, (color))
@@ -73,7 +76,10 @@ render_name_text("Charles Villar", 290, 240, "arial", red)
 render_catapult_text("Created at Operation Catapult 2016", 260, 440, "arial", red)
 
 
-Pause = pygame.Surface((800,600))
+Pause = pygame.image.load("ActionGameProject/Graphics/start_back.png")
+Pause = pygame.transform.scale(Pause, (800, 600))
+Pause = Pause.convert()
+Pause.set_colorkey()
 def render_paused_text(word, x, y, font, color):
     my_paused_font = pygame.font.SysFont('arial', 80, bold=True)
     paused_label = my_paused_font.render(word, 1, (color))
@@ -89,7 +95,9 @@ render_resume_text("Press Escape to continue!", 220, 280, "arial", red)
 
 
 
-Instructions = pygame.Surface((800,600))
+Instructions = pygame.image.load("ActionGameProject/Graphics/start_back.png")
+Instructions = pygame.transform.scale(Instructions, (800, 600))
+Instructions = Instructions.convert()
 def render_control_text(word, x, y, font, color):
     my_control_font = pygame.font.SysFont('arial', 40)
     control_label = my_control_font.render(word, 1, (color))
@@ -103,7 +111,7 @@ def render_other_text(word, x, y, font, color):
 #if somerendervariable == True:
 render_control_text("Controls:", 340, 80, "arial", red)
 render_control_text("Space bar - Shoot", 270, 160, "arial", red)
-render_control_text("Arrow keys - Movement", 232, 220, "arial", red)
+render_control_text("Arrow keys and WASD- Movement", 180, 220, "arial", red)
 render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
 render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
