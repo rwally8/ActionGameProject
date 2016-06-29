@@ -130,3 +130,60 @@ enemyImage = enemyImage.convert()
 enemyImage.set_colorkey(WHITE)
 enemyImage = pygame.transform.scale(enemyImage, (50,60))
 enemyImage = pygame.transform.flip(enemyImage, True, False)
+
+wizardHero = pygame.image.load("ActionGameProject/Graphics/wizard.png")
+wizardHero = pygame.transform.scale(wizardHero, (50,60))
+wizardHero = wizardHero.convert()
+wizardHero.set_alpha()
+wizardHero.set_colorkey(WHITE)
+
+
+heart3 =pygame.Surface((300,100))
+red = (255, 0, 0)
+black = (0, 0, 0)
+heart3.set_colorkey(BLACK)
+pygame.draw.circle(heart3, red, (10, 10), 10)
+pygame.draw.circle(heart3, red, (30, 10), 10)
+pygame.draw.polygon(heart3, red, ((0, 10), (40, 10), (20, 30)))
+pygame.draw.circle(heart3, red, (60, 10), 10)
+pygame.draw.circle(heart3, red, (80, 10), 10)
+pygame.draw.polygon(heart3, red, ((50, 10), (90, 10), (70, 30)))
+pygame.draw.circle(heart3, red, (110, 10), 10)
+pygame.draw.circle(heart3, red, (130, 10), 10)
+pygame.draw.polygon(heart3, red, ((100, 10), (140, 10), (120, 30)))
+
+
+heart2=pygame.Surface((300,100))
+red = (255, 0, 0)
+black = (0, 0, 0)
+heart2.set_colorkey(BLACK)
+pygame.draw.circle(heart2, red, (10, 10), 10)
+pygame.draw.circle(heart2, red, (30, 10), 10)
+pygame.draw.polygon(heart2, red, ((0, 10), (40, 10), (20, 30)))
+pygame.draw.circle(heart2, red, (60, 10), 10)
+pygame.draw.circle(heart2, red, (80, 10), 10)
+pygame.draw.polygon(heart2, red, ((50, 10), (90, 10), (70, 30)))
+
+
+heart1=pygame.Surface((300,100))
+red = (255, 0, 0)
+black = (0, 0, 0)
+heart1.set_colorkey(BLACK)
+pygame.draw.circle(heart1, red, (10, 10), 10)
+pygame.draw.circle(heart1, red, (30, 10), 10)
+pygame.draw.polygon(heart1, red, ((0, 10), (40, 10), (20, 30)))
+
+
+Game_Over = pygame.Surface((800,600))
+def render_death_text(word, x, y, font, color):
+    my_death_font = pygame.font.SysFont('arial', 80, bold=True)
+    death_label = my_death_font.render(word, 1, (color))
+    Game_Over.blit(death_label, (x, y))
+
+def render_restart_text(word, x, y, font, color):
+    my_restart_font = pygame.font.SysFont('arial', 30)
+    restart_label = my_restart_font.render(word, 1, (color))
+    Game_Over.blit(restart_label, (x, y))
+
+render_death_text("GAME   OVER", 180, 100, "arial", red)
+render_restart_text("Would you like to play again?", 240, 300, "arial", red)

@@ -24,7 +24,7 @@ pygame.key.set_repeat(1)
 #gameplay state
 preState = state = "Start Menu"
 #I have put the starting state as "start_menu" as a place holder. Change this based on what the state for the start menu is called. 
-#-------------------------------------------------------------------------------------------------------------------------------------------------           ---
+#----------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -57,7 +57,9 @@ while True:
                     state = "Game"                
                 elif state == "Credits":
                     state = "Start Menu"
-                elif state == "Instruction":
+                elif state == "Instructions":
+                    state = "Start Menu"
+                elif state == "Game Over":
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.fire()
@@ -68,25 +70,10 @@ while True:
                     state="Game"
                     pygame.mixer.music.stop()
                 elif ((x>=295)&(x<=355)&(y>=325)&(y<=360)):
-                    state="Instruction"
+                    state="Instructions"
                 elif ((x>=480)&(x<=575)&(y>=325)&(y<=360)):
                     state="Credits"
        
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    #CONTROLS THAT ALLOW THE PLAYER TO STOP
-    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------         
-        # if event.type == pygame.KEYUP:
-        #     if event.key == pygame.K_UP:
-        #         game.hero.y == 0
-        #     elif event.key == pygame.K_DOWN:
-        #         game.hero.y == 0
-        #     elif event.key == pygame.K_LEFT:
-        #         game.hero.x == 0
-        #     elif event.key == pygame.K_RIGHT:
-        #         game.hero.x == 0
-        #These controls allow the player to stop moving in a direction by releasing a key, which is optimal for doging and aiming. It also makes it easier to change directions
-        #If, for some reason, we do not want the player to be able to stop, remove these controls.
-    #------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
 
     print(state)
     #-------------------------

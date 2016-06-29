@@ -1,7 +1,6 @@
 import pygame
 import GraphicsLib as GLib
 from Game_Boarder import Background, Points
-from Wizard import Wizard1
 from Enemy import Enemy
 from Util import *
 import random
@@ -13,27 +12,41 @@ class Object:
         self.y = y
         self.img = img
 
-# a great example of an object that can move on the screen
-class Hero:
-    def __init__(self):
-        # ------------------------
-        # [REQUIRED PART] for any class that will be drawn on the screen
-        # Grab the surface that Graphics people worked very hard on
-        self.img = GLib.heroSprite
-        # Set the initial coordinate of this object
-        self.x = 0
-        self.y = 0
-        # ------------------------
-        # TODO: add more properties to Hero based on your game
-        self.vx = 0
-        self.vy = 0
 
-    # an example of updating position of the object
+class Health:
+    def __init__(self):
+        self.x = 50
+        self.y = 25
+        self.health = 3
+        self.img = GLib.heart3
+
     def update(self):
-        # TODO: what else hero is going to do in each frame
+        if self.health == 2:
+            self.img = GLib.heart2
+        if self.health == 1:
+            self.img = GLib.heart1
+        if self.health == 0:
+            state = "Game Over"
+        
+        
+
+
+
+class Wizard1:
+    def __init__(self,x,y):
+        self.x=x
+        self.y=y
+        self.vx=0
+        self.vy=0
+        # import image
+        self.img = GLib.wizardHero
+        #change the size of the wizard
+        
+    def update(self):
+        print("ok")
         self.x += self.vx
         self.y += self.vy
-        wrapAroundIn(self, 0, 0, 500, 500)
+        bounceIn(self, 0, 100, 200, 600)
 
 class Fireball:
     def __init__(self, x ,y):
@@ -73,7 +86,7 @@ class Enemynw:
         ammox=self.x 
         ammoy=self.y 
         if self.wepn== "Firebolt":
-            velox=[10]
+            velox=[5]
             veloy=[0]
             numb=1
         elif self.wepn== "Fireblast":
@@ -81,8 +94,8 @@ class Enemynw:
             veloy=[ 10,5,0,-5,-10]
             numb=5
         elif self.wepn== "Aimfire":
-            velox=[-(plrx-self.x)/20]
-            veloy=[(plry-self.y)/20]
+            velox=[-(plrx-self.x)/50]
+            veloy=[(plry-self.y)/50]
             numb=1
         for i in range(numb):
             nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
@@ -97,7 +110,7 @@ class Enemynw:
         elif self.up==False:
             self.x += self.vx
             self.y += self.vy
-        bounceIn(self, 0, 0, 800, 600)
+        bounceIn(self, 200, 0, 800, 600)
         
         
 class Game:
@@ -106,6 +119,7 @@ class Game:
         self.timer = self.stateTimer = 0
         self.hero = Wizard1(100,300)
         self.background = GLib.background_start
+        self.heathPoint = Health()
         self.scoreBoard = Points()
         self.resil = 1
         self.enemyLs = []
@@ -169,6 +183,7 @@ class Game:
     def updateInState(self, state):
         # increment the timer
         # check what state the game is at
+        diff=1                                          #currently a constant, but should be more fluid once the game is finished
         if state == "Start Menu":
             self.background = GLib.background_start
         elif state == "Pause":
@@ -183,15 +198,20 @@ class Game:
             if self.stateTimer == 0:
                 self.background = GLib.Credits
                 self.objectsOnScreen = []
+        elif state == "Game Over":
+            if self.stateTimer == 0:
+                self.background = GLib.Game_Over
+                self.objectsOnScreen = []
         elif state == "Game":
             self.timer += 1
             if self.stateTimer == 0:
                 self.background = GLib.background_game
-                self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets]
+                self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets, self.heathPoint]
             self.scoreBoard.update()
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
+            self.heathPoint.update()
             for f in self.fireballLs:
                 f.update()
             for e in self.enemyLs:
@@ -203,11 +223,16 @@ class Game:
                         if e in self.enemyLs:
                             self.scoreBoard.score += 1
                             self.enemyLs.remove(e)
+            for b in self.enemiesBullets:
+                if hasCollideCirc(b, self.hero, 10):
+                    self.heathPoint.health -= 1
+
+
             if self.first==True:
                 self.prirtimor=self.timer
                 self.first=False
-            elif self.timer-self.prirtimor>=100:                    #change post testing
-                self.spawndcd(4)                                    #this will eventually need a variable to hold difficulty, instead of being a constant
+            elif self.timer-self.prirtimor>=(100/diff):                  #this will eventually need fluidity, instead of being a constant  #change post testing
+                self.spawndcd(diff)                                    #this will eventually need fluidity, instead of being a constant
                 self.prirtimor=self.timer                     
                 for e in self.enemyLs:
                     e.fire(self.hero.x,self.hero.y)
@@ -222,6 +247,7 @@ class Game:
         else:
             raise Exception("Invalide state: " + str(state)) 
         return state
+    
 
     
     def draw(game, screen):
