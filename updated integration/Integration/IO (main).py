@@ -67,11 +67,8 @@ while True:
                 elif state == "Credits":
                     state = "Start Menu"
                 elif state == "Instructions":
-<<<<<<< HEAD
                     state = "Start Menu"
                 elif state == "Game Over":
-=======
->>>>>>> origin/master
                     state = "Start Menu"
             elif event.key == pygame.K_SPACE:
                 game.fire()
