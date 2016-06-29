@@ -6,6 +6,7 @@ from Enemy import Enemy
 from Util import *
 import random
 
+
 class Object:
     def __init__(self, x ,y, img):
         self.x = x
@@ -51,12 +52,12 @@ class Bullet:
         self.vx = velox
         self.vy = veloy
 
-    def uppos(self):
-        self.x +=self.vx
+    def update(self):
+        self.x -=self.vx
         self.y +=self.vy
         
 class Enemynw:
-    def __init__(self,life,entype,weapon,exposition,whyposition):
+    def __init__(self,life,entype,weapon,exposition,whyposition, direct):
         self.lives=life
         self.entyp=entype
         self.wepn=weapon
@@ -66,6 +67,7 @@ class Enemynw:
         self.vy = 10
         self.img = GLib.enemyImage
         self.bltlst=[]
+        self.up=direct
 
     def fire (self,plrx, plry):
         ammox=self.x 
@@ -87,13 +89,17 @@ class Enemynw:
             self.bltlst.append(nwbullet)
 
     def update(self):
-        self.x += self.vx
-        self.y += self.vy
+        if self.up==True:
+            self.x += self.vx
+            self.y -= self.vy
+            if self.y<=0:
+                self.up=False
+        elif self.up==False:
+            self.x += self.vx
+            self.y += self.vy
         bounceIn(self, 0, 0, 800, 600)
-        for i in range (len(self.bltlst)):
-            self.bltlst[i].x-=self.bltlst[i].vx
-            self.bltlst[i].y-=self.bltlst[i].vy
-
+        
+        
 class Game:
     def __init__(self):
         # initialize the timer to zero. This is like a little clock
@@ -101,7 +107,7 @@ class Game:
         self.hero = Wizard1(100,300)
         self.background = GLib.background_start
         self.scoreBoard = Points()
-        self.resil = 0
+        self.resil = 1
         self.enemyLs = []
         self.fireballLs = []
         self.enemiesBullets = []
@@ -112,6 +118,9 @@ class Game:
         # TODO: add any objects that you would like to be drawn on the screen
         # Make sure that all of those objects has x, y and img defined as their property
         self.objectsOnScreen = []
+        self.prirtimor=0
+        self.first=True
+        self.swtcerup=True
     
     def fire (self):
         x = self.hero.x
@@ -131,10 +140,15 @@ class Game:
         ymod=(600/(num+1))                          #ymod is the value which you must multiply by each ship's number to get it's position.     Change this if y changes from 500.
         self.resil=self.resil+(difficulty//5)
         if (difficulty//5)>=1:
-            difficulty=0
+            difficulty=1
         for i in range (num):
             yval=(i+1)*ymod
-            Newen=Enemynw(self.resil, Etype, Ewpn,xval,yval)
+            if self.swtcerup==True: 
+                Newen=Enemynw(self.resil, Etype, Ewpn,xval,yval,True)
+                self.swtcerup=False
+            elif self.swtcerup==False:
+                Newen=Enemynw(self.resil, Etype, Ewpn,xval,yval,False)
+                self.swtcerup=True
             Newen.fire(self.hero.x,self.hero.y)
             self.enemyLs.append(Newen)
             self.enemiesBullets.extend(Newen.bltlst)
@@ -182,18 +196,25 @@ class Game:
                 for f in self.fireballLs:
                     if hasCollideCirc(e, f, 10):
                         self.fireballLs.remove(f)
-                        self.enemyLs.remove(e)
-            if self.timer % 50 == 0:
-                self.spawndcd(5)
+                        if e in self.enemyLs:
+                            self.enemyLs.remove(e)
+            if self.first==True:
+                self.prirtimor=self.timer
+                self.first=False
+            elif self.timer-self.prirtimor>=30:                    #change post testing
+                self.spawndcd(4)                                    #this will eventually need a variable to hold difficulty, instead of being a constant
+                self.prirtimor=self.timer                     
                 for e in self.enemyLs:
                     e.fire(self.hero.x,self.hero.y)
+            for i in self.enemiesBullets:
+                i.update()
             # use showAnimationOn functon immported from Util module,
             # it taks three argument, the object to have animation, the animation, and the frameNumber
             # this example switch to the next frame every 5 ticks
             #showAnimationOn(self.ball, [GLib.ballSpriteBLUE, GLib.ballSpriteOrange, GLib.someLoadedImage], self.timer / 2)
             # bounceIn(self.hero, 0, 0, 500, 500)
         else:
-            raise Exception("Invalide state: " + str(state))
+            raise Exception("Invalide state: " + str(state)) 
         return state
 
     

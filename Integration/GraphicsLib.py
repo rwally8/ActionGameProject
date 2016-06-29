@@ -110,7 +110,7 @@ render_control_text("ESC - Pause / resume game", 200, 280, "arial", red)
 render_other_text("Press ESC to go back.", 0, 0, "arial", red)
 
 
-Fireball = pygame.Surface((40,40))
+Fireball = pygame.Surface((30,30))
 pygame.draw.circle(Fireball, BLUE, (20, 20), 6)
 pygame.draw.polygon(Fireball, BLUE, ((20, 14), (8, 17), (20, 20)))
 pygame.draw.polygon(Fireball, BLUE, ((20, 17), (4, 20), (20, 23)))

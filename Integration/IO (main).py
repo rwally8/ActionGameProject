@@ -20,7 +20,7 @@ pygame.key.set_repeat(1)
 #gameplay state
 preState = state = "Start Menu"
 #I have put the starting state as "start_menu" as a place holder. Change this based on what the state for the start menu is called. 
-#----------------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------------------           ---
 
 
 
