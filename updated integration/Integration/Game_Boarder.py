@@ -19,9 +19,10 @@ class Points:
         self.x=500
         self.y=50
         self.font=pygame.font.SysFont('monospace', 50)
+        self.score = 0
 
-    def update(self, scoreNum):
-        self.img = self.font.render('Points:'+str(scoreNum), True, WHITE)
+    def update(self):
+        self.img = self.font.render('Points:'+str(self.score), True, WHITE)
 
 
 

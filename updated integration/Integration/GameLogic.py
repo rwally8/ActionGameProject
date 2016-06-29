@@ -188,7 +188,7 @@ class Game:
             if self.stateTimer == 0:
                 self.background = GLib.background_game
                 self.objectsOnScreen = [self.hero, self.scoreBoard, self.fireballLs, self.enemyLs, self.enemiesBullets]
-                self.scoreBoard.update(100)
+            self.scoreBoard.update()
             # TODO: what the game would do in this state
             # update the position of hero based on its velocity
             self.hero.update()
@@ -201,6 +201,7 @@ class Game:
                     if hasCollideCirc(e, f, 10):
                         self.fireballLs.remove(f)
                         if e in self.enemyLs:
+                            self.scoreBoard.score += 1
                             self.enemyLs.remove(e)
             if self.first==True:
                 self.prirtimor=self.timer
