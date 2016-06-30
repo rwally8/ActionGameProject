@@ -232,7 +232,7 @@ class Game:
                 e.update()
             for e in self.enemyLs:
                 for f in self.fireballLs:
-                    if hasCollideCirc(e, f, 10):
+                    if hasCollideRect(e, f):
                         self.fireballLs.remove(f)
                         if e in self.enemyLs:
                             self.scoreBoard.score += 1
