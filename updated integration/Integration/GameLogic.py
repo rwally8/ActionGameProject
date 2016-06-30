@@ -95,7 +95,7 @@ class Enemynw:
         self.bltlst=[]
         self.up=direct
 
-    def fire (self,plrx, plry):
+    def fire(self,plrx, plry):
         ammox=self.x 
         ammoy=self.y 
         if self.wepn== "Firebolt":
@@ -113,7 +113,7 @@ class Enemynw:
         for i in range(numb):
             nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
             self.bltlst.append(nwbullet)
-
+        return numb                                             #in testing
     def update(self):
         if self.up==True:
             self.x += self.vx
@@ -177,7 +177,7 @@ class Game:
             elif self.swtcerup==False:
                 Newen=Enemynw(self.resil, Etype, Ewpn,xval,yval,False)
                 self.swtcerup=True
-            Newen.fire(self.hero.x,self.hero.y)
+            holder=Newen.fire(self.hero.x,self.hero.y)
             self.enemyLs.append(Newen)
             #self.enemiesBullets=[]
             #for i in range (len(self.enemyLs)):
@@ -252,8 +252,10 @@ class Game:
                 self.spawndcd(diff)                                    #this will eventually need fluidity, instead of being a constant
                 self.prirtimor=self.timer                     
                 for e in self.enemyLs:
-                    e.fire(self.hero.x,self.hero.y)
-                    self.enemiesBullets.extend(e.bltlst)
+                    Newnum=e.fire(self.hero.x,self.hero.y)
+                    bltlstlength=len(e.bltlst)
+                    for i in range (Newnum):
+                        self.enemiesBullets.append(e.bltlst[bltlstlength-(i+1)])            #in testing
             for i in self.enemiesBullets:
                 i.update()
             # use showAnimationOn functon immported from Util module,
