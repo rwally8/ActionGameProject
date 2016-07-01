@@ -113,7 +113,7 @@ class Enemynw:
         for i in range(numb):
             nwbullet=Bullet(ammox,ammoy,velox[i],veloy[i])
             self.bltlst.append(nwbullet)
-        return numb                                             #in testing
+        return numb                                             
     def update(self):
         if self.up==True:
             self.x += self.vx

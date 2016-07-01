@@ -33,8 +33,6 @@ while True:
     #-------------------------
     # Our event hanlding loop
     #-------------------------
-    ## You are not supposed to call any graphics method like blit or flip here,
-    ## All you need to do is update some state of game.
     eventList = pygame.event.get()
     # grab all events pygame recieved
     for event in eventList:
@@ -43,22 +41,22 @@ while True:
             exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_w:
-                game.hero.y -= 5
+                game.hero.y -= 10
             elif event.key == pygame.K_s:
-                game.hero.y +=5
+                game.hero.y +=10
             elif event.key == pygame.K_a:
-                game.hero.x -= 5
+                game.hero.x -= 10
             elif event.key == pygame.K_d:
-                game.hero.x += 5
+                game.hero.x += 10
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
-                game.hero.y -= 5
+                game.hero.y -= 10
             elif event.key == pygame.K_DOWN:
-                game.hero.y += 5
+                game.hero.y += 10
             elif event.key == pygame.K_LEFT:
-                game.hero.x -= 5
+                game.hero.x -= 10
             elif event.key == pygame.K_RIGHT:
-                game.hero.x += 5
+                game.hero.x += 10
             elif event.key == pygame.K_ESCAPE:
                 if state == "Game":
                     state = "Pause"
@@ -110,5 +108,5 @@ while True:
     #-------------------------
     pygame.display.flip()
     # ask pygame to display everythong on the GUI
-    pygame.time.wait(40)
+    pygame.time.wait(25)
     # delay the time, so can see the Windows, controls the frame rate   
